@@ -9,8 +9,10 @@
 #include "TriangleDlg.h"
 #include "PolyDlg.h"
 #include "BoundaryFillDlg.h"
+#include "TransformDlg.h"
+
 #include "PolyStruct.h"
-#include <vector>
+#include "CTransform.h"
 #define Round(d) int(floor(d+0.5)) 
 class CMy201916010728View : public CView
 {
@@ -63,6 +65,7 @@ public:
 	void polyScanDraw(point* ptr, int col);
 	void Bfs(int x, int y, int col, int edgeCol, CDC* pDC);
 	afx_msg void OnBoundaryFill();
+	afx_msg void OnTransform();
 };
 
 #ifndef _DEBUG  // 201916010728View.cpp 中的调试版本

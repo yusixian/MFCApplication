@@ -90,6 +90,7 @@
 #define IDD_DIALOG4                     318
 #define IDD_DIALOG5                     320
 #define IDD_DIALOG6                     322
+#define IDD_DIALOG7                     324
 #define IDC_x                           1000
 #define IDC_r                           1001
 #define IDC_ex                          1001
@@ -103,12 +104,14 @@
 #define IDC_RDy                         1010
 #define IDC_x3                          1011
 #define IDC_y3                          1012
-#define IDC_RDy2                        1012
 #define IDC_x1                          1013
 #define IDC_y1                          1014
 #define IDC_x2                          1015
 #define IDC_y2                          1016
 #define IDC_y4                          1017
+#define IDC_Angle                       1017
+#define IDC_tx                          1020
+#define IDC_ty                          1021
 #define IDC_x4                          1027
 #define IDC_y5                          1028
 #define IDC_x5                          1029
@@ -132,14 +135,15 @@
 #define ID_32786                        32786
 #define ID_32787                        32787
 #define ID_32788                        32788
+#define ID_32789                        32789
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        324
-#define _APS_NEXT_COMMAND_VALUE         32789
-#define _APS_NEXT_CONTROL_VALUE         1017
+#define _APS_NEXT_RESOURCE_VALUE        326
+#define _APS_NEXT_COMMAND_VALUE         32790
+#define _APS_NEXT_CONTROL_VALUE         1018
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

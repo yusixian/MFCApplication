@@ -75,6 +75,15 @@
     <ClInclude Include="BoundaryFillDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CP2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="201916010728.cpp">
@@ -126,6 +135,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="BoundaryFillDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CP2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

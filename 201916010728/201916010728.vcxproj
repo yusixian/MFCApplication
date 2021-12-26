@@ -189,6 +189,8 @@
     <ClInclude Include="BoundaryFillDlg.h" />
     <ClInclude Include="CircleDlg.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="CP2.h" />
+    <ClInclude Include="CTransform.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LineDlg.h" />
@@ -201,6 +203,7 @@
     <ClInclude Include="RectangleDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TransformDlg.h" />
     <ClInclude Include="TriangleDlg.h" />
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
@@ -211,6 +214,8 @@
     <ClCompile Include="BoundaryFillDlg.cpp" />
     <ClCompile Include="CircleDlg.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="CP2.cpp" />
+    <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="LineDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
@@ -225,6 +230,7 @@
     <ClCompile Include="PolyStruct.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="RectangleDlg.cpp" />
+    <ClCompile Include="TransformDlg.cpp" />
     <ClCompile Include="TriangleDlg.cpp" />
     <ClCompile Include="ViewTree.cpp" />
   </ItemGroup>

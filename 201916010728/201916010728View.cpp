@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CMy201916010728View, CView)
 	ON_COMMAND(ID_Menu, &CMy201916010728View::OnBresenham)
 	ON_COMMAND(ID_32780, &CMy201916010728View::OnPolyScan)
 	ON_COMMAND(ID_32781, &CMy201916010728View::OnBoundaryFill)
+	ON_COMMAND(ID_32789, &CMy201916010728View::OnTransform)
 END_MESSAGE_MAP()
 
 // CMy201916010728View 构造/析构
@@ -681,4 +682,34 @@ void CMy201916010728View::OnBoundaryFill() {
 		pDC->Rectangle(LU.x, LU.y, RD.x, RD.y);
 		Bfs(S.x, S.y, RGB(255, 105, 180), RGB(0, 0, 0), pDC);
 	}
+}
+
+
+void CMy201916010728View::OnTransform()
+{
+	CDC* pDC = GetDC();
+	CPoint pt[3] = { CPoint(200,200),CPoint(100,100), CPoint(200,100) };
+	pDC->Polygon(pt, 3);		// 先画一个三角形
+	// TODO: 在此添加命令处理程序代码
+	int angle, sx, sy, tx, ty;
+	TransformDlg inputDlg;
+	int nResponse = inputDlg.DoModal();
+	if (nResponse == IDOK) {
+		angle = _wtoi(inputDlg.angle.GetBuffer(0));
+		sx = _wtoi(inputDlg.sx.GetBuffer(0));
+		sy = _wtoi(inputDlg.sy.GetBuffer(0));
+		tx = _wtoi(inputDlg.tx.GetBuffer(0));
+		ty = _wtoi(inputDlg.ty.GetBuffer(0));
+	}
+	else return;
+	CP2 pol[3] = { CP2(200,200),CP2(100,100), CP2(200,100) };
+	CTransform c1(3, pol);
+	//c1.rotate(90);
+	//c1.translate(300, 0);
+	//c1.scale(2, 2);
+	c1.rotate(angle);
+	c1.translate(tx, ty);
+	c1.scale(sx, sy);
+	CPoint pt2[3] = { CPoint(pol[0].x, pol[0].y),CPoint(pol[1].x, pol[1].y), CPoint(pol[2].x, pol[2].y) };
+	pDC->Polygon(pt2, 3);
 }
