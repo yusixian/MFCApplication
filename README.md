@@ -17,4 +17,18 @@
 
 ![6_}J)I$M@VW `WW9EL APID](https://user-images.githubusercontent.com/43498495/147418376-77449209-9ef9-4e07-8f14-9606bc82c4ef.png)
 
-- 
+- 基本图元生成算法
+  - DDA√
+    ![image](https://user-images.githubusercontent.com/43498495/147418577-9b549ddf-89df-409f-859d-7f15cd0f19d7.png)
+  - 中点画线算法√
+    ![image](https://user-images.githubusercontent.com/43498495/147418760-033404f1-4d48-40cb-9e8d-22e94c9e55ee.png)
+  - Bresenham画圆√
+    ![image](https://user-images.githubusercontent.com/43498495/147418847-153b791b-f2e1-4874-ab0e-a8ba41922716.png)
+  - 多边形扫描转换√ （种子填充、有效边表）
+
+![J6OO 33E ~ Y@02 V14@BCE](https://user-images.githubusercontent.com/43498495/147420028-d20e3b26-0b98-4483-87fe-65ad7cba6240.png)
+![U1%GU}{(ZSQLJZ0 Q7Q}M`Q](https://user-images.githubusercontent.com/43498495/147420031-2e8273bd-2f9d-4a18-88df-bac50858837e.png)
+![U1%GU}{(ZSQLJZ0 Q7Q}M`Q](https://user-images.githubusercontent.com/43498495/147420025-ad12970e-6f57-4793-b788-a6d2a9c9c4c3.png)
+
+![IC4OWQOHF0 {6U@$()V{28K](https://user-images.githubusercontent.com/43498495/147420019-e2d7a587-c50e-43bb-a774-7a599e5c6d45.png)
+![ZLF5)7G~0ID E3CF7Z45F 8](https://user-images.githubusercontent.com/43498495/147420023-226249b5-687c-49b1-ae0e-7faefa39be3d.png)
