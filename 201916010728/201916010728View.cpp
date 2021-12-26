@@ -265,13 +265,20 @@ void CMy201916010728View::OnCdcPainting()
 }
 
 
-void CMy201916010728View::OnDDA()
-{
+void CMy201916010728View::OnDDA() {
 	// TODO: 在此添加命令处理程序代码
 
 	int x1, y1, x2, y2;
-	x1 = y1 = 100;
-	x2 = 300, y2 = 200;
+	LineDlg inputDlg;
+	int nResponse = inputDlg.DoModal();
+	if (nResponse == IDOK) {
+		//这里获取输入并在客户区输出
+		x1 = _wtoi(inputDlg.sx.GetBuffer(0));
+		y1 = _wtoi(inputDlg.sy.GetBuffer(0));
+		x2 = _wtoi(inputDlg.ex.GetBuffer(0));
+		y2 = _wtoi(inputDlg.ey.GetBuffer(0));
+	}
+	else return;
 	double delta_x, delta_y, x, y;
 	int dx, dy, steps;
 	dx = x2 - x1;
@@ -282,7 +289,7 @@ void CMy201916010728View::OnDDA()
 	delta_y = dy * 1.0 / steps;
 	x = x1, y = y1;
 	CDC* pDC = GetDC();
-	pDC->SetPixel(x, y, RGB(255, 0, 0));
+	pDC->SetPixel(x, y, RGB(255, 0, 0));		// DDA画线用红色的（以表区分）
 	for (int i = 1; i <= steps; i++) {
 		x += delta_x;
 		y += delta_y;
