@@ -40,6 +40,7 @@ void BoundaryFillDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(BoundaryFillDlg, CDialog)
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 

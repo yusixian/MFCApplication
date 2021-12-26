@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include<GL\glut.h>
 #include "CircleDlg.h"
 #include "LineDlg.h"
 #include "RectangleDlg.h"
@@ -27,9 +28,20 @@ public:
 // 操作
 public:
 
+protected:
+	HGLRC m_hRC;//Rendering Context着色描述表
+	CClientDC* m_pDC; //Device Context设备描述表
+
+	int m_wide; //视口的宽度
+	int m_heigth;//视口的高度
+	BOOL InitializeOpenGL();
+	//初始化OpenGL
+	BOOL SetupPixelFormat();//设置像素格式
+	void RenderScene();//绘制场景
 // 重写
 public:
 	virtual void OnDraw(CDC* pDC);  // 重写以绘制该视图
+	BOOL OnEraseBkgnd(CDC* pDC);
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
@@ -66,6 +78,12 @@ public:
 	void Bfs(int x, int y, int col, int edgeCol, CDC* pDC);
 	afx_msg void OnBoundaryFill();
 	afx_msg void OnTransform();
+	afx_msg void OnDrawBall();
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnDestroy();
+	void reshape(int w, int h);
+	void display();
 };
 
 #ifndef _DEBUG  // 201916010728View.cpp 中的调试版本
