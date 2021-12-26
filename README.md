@@ -35,5 +35,6 @@
   - 二维变换√
 ![2S(9EL$ RCNF FKJX92B~5V](https://user-images.githubusercontent.com/43498495/147420435-7a4ca3a7-ece0-4947-a620-3578e7258f25.png)
 ![6$_(J4DTY{PAO2JR(F@7()D](https://user-images.githubusercontent.com/43498495/147420438-f1184525-484b-4984-9ff0-c0d51c9a8ba7.png)
-
+- 三维图像立方体√
+![image](https://user-images.githubusercontent.com/43498495/147422023-1fb09a94-dda7-464a-9c5e-9730a7e6b8bc.png)
 
