@@ -3,7 +3,10 @@
 //
 
 #pragma once
-
+#include "CircleDlg.h"
+#include "LineDlg.h"
+#include "RectangleDlg.h"
+#include "TriangleDlg.h"
 
 class CMy201916010728View : public CView
 {
@@ -43,6 +46,11 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnCdcLine();
+	afx_msg void OnCdcTriangle();
+	afx_msg void OnCdcCircle();
+	afx_msg void OnCdcRectangle();
 };
 
 #ifndef _DEBUG  // 201916010728View.cpp 中的调试版本

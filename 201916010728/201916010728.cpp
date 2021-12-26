@@ -170,6 +170,8 @@ protected:
 // 实现
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnCdcRectangle();
 };
 
 CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
@@ -182,6 +184,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+	ON_COMMAND(ID_CDC32773, &CAboutDlg::OnCdcRectangle)
 END_MESSAGE_MAP()
 
 // 用于运行对话框的应用程序命令
@@ -217,3 +220,9 @@ void CMy201916010728App::SaveCustomState()
 
 
 
+
+
+void CAboutDlg::OnCdcRectangle()
+{
+	// TODO: 在此添加命令处理程序代码
+}
