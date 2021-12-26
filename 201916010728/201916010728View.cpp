@@ -32,6 +32,8 @@ BEGIN_MESSAGE_MAP(CMy201916010728View, CView)
 	ON_COMMAND(ID_CDC32772, &CMy201916010728View::OnCdcTriangle)
 	ON_COMMAND(ID_CDC32774, &CMy201916010728View::OnCdcCircle)
 	ON_COMMAND(ID_CDC32773, &CMy201916010728View::OnCdcRectangle)
+	ON_COMMAND(ID_CDC32775, &CMy201916010728View::OnCdcPainting)
+	ON_COMMAND(ID_32776, &CMy201916010728View::OnDDA)
 END_MESSAGE_MAP()
 
 // CMy201916010728View 构造/析构
@@ -224,4 +226,66 @@ void CMy201916010728View::OnCdcRectangle()
 		RDY = _wtoi(inputDlg.RDY.GetBuffer(0));
 		pDC->Rectangle(LUX, LUY, RDX, RDY);
 	} else return;
+}
+// 创意绘图
+void CMy201916010728View::OnCdcPainting()
+{
+	// TODO: 在此添加命令处理程序代码
+	CDC* pDC = GetDC();
+	pDC->Ellipse(100, 100, 300, 300);// 风车圆
+	pDC->Ellipse(250, 350, 350, 450);// 小人头
+	pDC->MoveTo(300, 450);
+	pDC->LineTo(300, 500);	// 小人脖子
+	pDC->MoveTo(200, 500);
+	pDC->LineTo(400, 500);	// 小人手
+	pDC->MoveTo(300, 500);
+	pDC->LineTo(220, 620);	// 小人左腿
+	pDC->MoveTo(300, 500);
+	pDC->LineTo(380, 620);	// 小人右腿
+	CPoint pt[3] = { CPoint(200, 100),CPoint(250, 150), CPoint(200, 200) };	// 风车小三角1
+	CPoint pt2[3] = { CPoint(200, 200),CPoint(300, 200), CPoint(250, 250) };// 风车小三角2
+	CPoint pt3[3] = { CPoint(200, 200),CPoint(150, 150), CPoint(100, 200) };// 风车小三角3
+	CPoint pt4[3] = { CPoint(200, 200),CPoint(150, 250), CPoint(200, 300) };// 风车小三角4
+	CPen MyPen, * OldPen;//定义画笔
+	MyPen.CreatePen(PS_SOLID, 1, RGB(0, 0, 0));//创建蓝色画笔
+	OldPen = pDC->SelectObject(&MyPen);//选中画笔到设备上下文
+	CBrush MyBrush, * OldBrush;//定义填充画刷
+	MyBrush.CreateSolidBrush(RGB(255, 0, 0));//创建红色画刷
+	OldBrush = pDC->SelectObject(&MyBrush);//选中画刷到设备山下文
+	pDC->Polygon(pt, 3);
+	pDC->Polygon(pt2, 3);
+	pDC->Polygon(pt3, 3);
+	pDC->Polygon(pt4, 3);
+	pDC->MoveTo(200, 300);
+	pDC->LineTo(200, 600);
+	pDC->SelectObject(OldPen); //画框线为蓝色
+	pDC->SelectObject(OldBrush); // 填充为红色
+	MyPen.DeleteObject();//删除画笔
+	MyBrush.DeleteObject();//删除画刷
+}
+
+
+void CMy201916010728View::OnDDA()
+{
+	// TODO: 在此添加命令处理程序代码
+
+	int x1, y1, x2, y2;
+	x1 = y1 = 100;
+	x2 = 300, y2 = 200;
+	double delta_x, delta_y, x, y;
+	int dx, dy, steps;
+	dx = x2 - x1;
+	dy = y2 - y1;
+	if (abs(dx) > abs(dy)) steps = abs(dx);
+	else steps = abs(dy);
+	delta_x = dx * 1.0 / steps;
+	delta_y = dy * 1.0 / steps;
+	x = x1, y = y1;
+	CDC* pDC = GetDC();
+	pDC->SetPixel(x, y, RGB(255, 0, 0));
+	for (int i = 1; i <= steps; i++) {
+		x += delta_x;
+		y += delta_y;
+		pDC->SetPixel(x, y, RGB(255, 0, 0));
+	}
 }

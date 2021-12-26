@@ -51,6 +51,8 @@ public:
 	afx_msg void OnCdcTriangle();
 	afx_msg void OnCdcCircle();
 	afx_msg void OnCdcRectangle();
+	afx_msg void OnCdcPainting();
+	afx_msg void OnDDA();
 };
 
 #ifndef _DEBUG  // 201916010728View.cpp 中的调试版本
