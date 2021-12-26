@@ -7,7 +7,11 @@
 #include "LineDlg.h"
 #include "RectangleDlg.h"
 #include "TriangleDlg.h"
-
+#include "PolyDlg.h"
+#include "BoundaryFillDlg.h"
+#include "PolyStruct.h"
+#include <vector>
+#define Round(d) int(floor(d+0.5)) 
 class CMy201916010728View : public CView
 {
 protected: // 仅从序列化创建
@@ -53,6 +57,12 @@ public:
 	afx_msg void OnCdcRectangle();
 	afx_msg void OnCdcPainting();
 	afx_msg void OnDDA();
+	afx_msg void OnLineMid();
+	afx_msg void OnBresenham();
+	afx_msg void OnPolyScan();
+	void polyScanDraw(point* ptr, int col);
+	void Bfs(int x, int y, int col, int edgeCol, CDC* pDC);
+	afx_msg void OnBoundaryFill();
 };
 
 #ifndef _DEBUG  // 201916010728View.cpp 中的调试版本

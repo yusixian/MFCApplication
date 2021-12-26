@@ -186,6 +186,7 @@
     <ClInclude Include="201916010728.h" />
     <ClInclude Include="201916010728Doc.h" />
     <ClInclude Include="201916010728View.h" />
+    <ClInclude Include="BoundaryFillDlg.h" />
     <ClInclude Include="CircleDlg.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="FileView.h" />
@@ -194,6 +195,8 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PolyDlg.h" />
+    <ClInclude Include="PolyStruct.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="RectangleDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -205,6 +208,7 @@
     <ClCompile Include="201916010728.cpp" />
     <ClCompile Include="201916010728Doc.cpp" />
     <ClCompile Include="201916010728View.cpp" />
+    <ClCompile Include="BoundaryFillDlg.cpp" />
     <ClCompile Include="CircleDlg.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="FileView.cpp" />
@@ -217,6 +221,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PolyDlg.cpp" />
+    <ClCompile Include="PolyStruct.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="RectangleDlg.cpp" />
     <ClCompile Include="TriangleDlg.cpp" />

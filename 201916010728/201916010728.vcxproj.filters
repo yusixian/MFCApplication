@@ -66,6 +66,15 @@
     <ClInclude Include="TriangleDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PolyStruct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundaryFillDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="201916010728.cpp">
@@ -108,6 +117,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TriangleDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyStruct.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundaryFillDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

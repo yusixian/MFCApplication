@@ -88,6 +88,8 @@
 #define IDD_DIALOG2                     314
 #define IDD_DIALOG3                     316
 #define IDD_DIALOG4                     318
+#define IDD_DIALOG5                     320
+#define IDD_DIALOG6                     322
 #define IDC_x                           1000
 #define IDC_r                           1001
 #define IDC_ex                          1001
@@ -101,10 +103,17 @@
 #define IDC_RDy                         1010
 #define IDC_x3                          1011
 #define IDC_y3                          1012
+#define IDC_RDy2                        1012
 #define IDC_x1                          1013
 #define IDC_y1                          1014
 #define IDC_x2                          1015
 #define IDC_y2                          1016
+#define IDC_y4                          1017
+#define IDC_x4                          1027
+#define IDC_y5                          1028
+#define IDC_x5                          1029
+#define IDC_y6                          1030
+#define IDC_x6                          1031
 #define ID_CDC32771                     32771
 #define ID_CDC32772                     32772
 #define ID_CDC32773                     32773
@@ -128,7 +137,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        320
+#define _APS_NEXT_RESOURCE_VALUE        324
 #define _APS_NEXT_COMMAND_VALUE         32789
 #define _APS_NEXT_CONTROL_VALUE         1017
 #define _APS_NEXT_SYMED_VALUE           310

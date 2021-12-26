@@ -34,6 +34,10 @@ BEGIN_MESSAGE_MAP(CMy201916010728View, CView)
 	ON_COMMAND(ID_CDC32773, &CMy201916010728View::OnCdcRectangle)
 	ON_COMMAND(ID_CDC32775, &CMy201916010728View::OnCdcPainting)
 	ON_COMMAND(ID_32776, &CMy201916010728View::OnDDA)
+	ON_COMMAND(ID_32777, &CMy201916010728View::OnLineMid)
+	ON_COMMAND(ID_Menu, &CMy201916010728View::OnBresenham)
+	ON_COMMAND(ID_32780, &CMy201916010728View::OnPolyScan)
+	ON_COMMAND(ID_32781, &CMy201916010728View::OnBoundaryFill)
 END_MESSAGE_MAP()
 
 // CMy201916010728View 构造/析构
@@ -294,5 +298,387 @@ void CMy201916010728View::OnDDA() {
 		x += delta_x;
 		y += delta_y;
 		pDC->SetPixel(x, y, RGB(255, 0, 0));
+	}
+}
+
+// 中点画线法绘制直线
+void CMy201916010728View::OnLineMid() {
+	// TODO: 在此添加命令处理程序代码
+	CDC* pDC = GetDC();
+	CPoint vstart, vend;
+	LineDlg inputDlg;
+	int nResponse = inputDlg.DoModal();
+	if (nResponse == IDOK) {
+		//这里获取输入并在客户区输出
+		vstart.x = _wtoi(inputDlg.sx.GetBuffer(0));
+		vstart.y = _wtoi(inputDlg.sy.GetBuffer(0));
+		vend.x = _wtoi(inputDlg.ex.GetBuffer(0));
+		vend.y = _wtoi(inputDlg.ex.GetBuffer(0));
+	}
+	else return;
+	CPoint p, t;
+	COLORREF clr = RGB(255, 99, 71);
+	if (fabs(vstart.x - vend.x) < 1e-6) {
+		if (vstart.y > vend.y) {
+			t = vstart;
+			vstart = vend;
+			vend = t;
+		}
+		for (p = vstart; p.y < vend.y; p.y++) {
+			pDC->SetPixelV(Round(p.x), Round(p.y), clr);
+		}
+
+	}
+	else {
+		double k, d;
+		k = (vend.y - vstart.y) / (vend.x - vstart.x);
+
+		if (k > 1.0)
+		{
+			if (vstart.y > vend.y)
+			{
+				t = vstart;
+				vstart = vend;
+				vend = t;
+			}
+			d = 1 - 0.5 * k;
+			for (p = vstart; p.y < vend.y; p.y++)
+			{
+				pDC->SetPixelV(Round(p.x), Round(p.y), clr);
+				if (d >= 0)
+				{
+					p.x++;
+					d += 1 - k;
+				}
+				else
+					d += 1;
+			}
+		}
+		if (0.0 <= k && k <= 1.0)
+		{
+			if (vstart.x > vend.x) {
+				t = vstart;
+				vstart = vend;
+				vend = t;
+			}
+			d = 0.5 - k;
+			for (p = vstart; p.x < vend.x; p.x++)
+			{
+				pDC->SetPixelV(Round(p.x), Round(p.y), clr);
+
+				if (d < 0)
+				{
+					p.y++;
+					d += 1 - k;
+				}
+				else
+					d -= k;
+			}
+		}
+
+		if (k >= -1.0 && k < 0.0)
+		{
+			if (vstart.x > vend.x)
+			{
+				t = vstart;
+				vstart = vend;
+				vend = t;
+			}
+			d = -0.5 - k;
+
+			for (p = vstart; p.x < vend.x; p.x++)
+			{
+				pDC->SetPixelV(Round(p.x), Round(p.y), clr);
+				if (d > 0)
+				{
+					p.y--;
+					d -= 1 + k;
+				}
+				else
+					d -= k;
+
+			}
+		}
+
+		if (k < -1.0)
+		{
+			if (vstart.y < vend.y)
+			{
+				t = vstart;
+				vstart = vend;
+				vend = t;
+			}
+			d = -1 - 0.5 * k;
+			for (p = vstart; p.y < vend.y; p.y--)
+			{
+				pDC->SetPixelV(Round(p.x), Round(p.y), clr);
+				if (d < 0)
+				{
+					p.x++;
+					d -= 1 + k;
+				}
+				else
+					d -= 1;
+			}
+		}
+	}
+	vstart = vend;
+}
+
+
+void CMy201916010728View::OnBresenham() {
+	// TODO: 在此添加命令处理程序代码
+	CDC* pDC = GetDC();
+	int r = 200;
+	int x0 = 200, y0 = 200, x, y;
+	CircleDlg inputDlg;
+	int nResponse = inputDlg.DoModal();
+	if (nResponse == IDOK) {
+		//这里获取输入并在客户区输出
+		x0 = _wtoi(inputDlg.x.GetBuffer(0));
+		y0 = _wtoi(inputDlg.y.GetBuffer(0));
+		r = _wtoi(inputDlg.r.GetBuffer(0));
+	}
+	else return;
+	int c = RGB(219, 112, 147);
+	float d;
+	d = 3 - 2 * r;
+	x = 0;
+	y = r;
+	while (x <= y) {
+		if (d < 0) {
+			d = d + 4 * x + 6;
+			x = x + 1;
+		}
+		else if (d >= 0) {
+			d = d + 4 * (x - y) + 10;
+			x = x + 1;
+			y = y - 1;
+		}
+		pDC->SetPixel(x + x0, y + y0, c);
+		pDC->SetPixel(-x + x0, y + y0, c);
+		pDC->SetPixel(x + x0, -y + y0, c);
+		pDC->SetPixel(-x + x0, -y + y0, c);
+		pDC->SetPixel(y + x0, x + y0, c);
+		pDC->SetPixel(-y + x0, x + y0, c);
+		pDC->SetPixel(y + x0, -x + y0, c);
+		pDC->SetPixel(-y + x0, -x + y0, c);
+	}
+}
+
+
+void CMy201916010728View::OnPolyScan() {
+	int col = RGB(255, 182, 193);	//粉嫩嫩颜色
+	// TODO: 在此处添加实现代码.	
+	point polypoint[POINTNUM] = { 170,10, 360,100, 360,200, 230,130, 140,170, 140,80 };//多边形顶点  
+	polyScanDraw(polypoint, col);		//画准备好的多边形
+
+	int x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6;
+	PolyDlg inputDlg;
+	int nResponse = inputDlg.DoModal();
+	if (nResponse == IDOK) {
+		//这里获取输入并在客户区输出
+		polypoint[0].x = _wtoi(inputDlg.x1.GetBuffer(0));
+		polypoint[0].y = _wtoi(inputDlg.y1.GetBuffer(0));
+
+		polypoint[1].x = _wtoi(inputDlg.x2.GetBuffer(0));
+		polypoint[1].y = _wtoi(inputDlg.y2.GetBuffer(0));
+
+		polypoint[2].x = _wtoi(inputDlg.x3.GetBuffer(0));
+		polypoint[2].y = _wtoi(inputDlg.y3.GetBuffer(0));
+
+		polypoint[3].x = _wtoi(inputDlg.x4.GetBuffer(0));
+		polypoint[3].y = _wtoi(inputDlg.y4.GetBuffer(0));
+
+		polypoint[4].x = _wtoi(inputDlg.x5.GetBuffer(0));
+		polypoint[4].y = _wtoi(inputDlg.y5.GetBuffer(0));
+
+		polypoint[5].x = _wtoi(inputDlg.x6.GetBuffer(0));
+		polypoint[5].y = _wtoi(inputDlg.y6.GetBuffer(0));
+	}
+	else return;
+	polyScanDraw(polypoint, RGB(127, 255, 212));	//绿的
+
+
+}
+
+
+void CMy201916010728View::polyScanDraw(point* polypoint, int col) {
+	CDC* pDC = GetDC();
+	if (!polypoint) return;
+	// TODO: 在此处添加实现代码.	
+	int MaxY = 0;
+	int MinY = 2000;
+	int i;
+	for (i = 0; i < POINTNUM; i++) {
+		if (polypoint[i].y > MaxY)
+			MaxY = polypoint[i].y;
+		if (polypoint[i].y < MinY)
+			MinY = polypoint[i].y;
+	}
+
+	/*******初始化AET表，即初始化活跃边表**********/
+	AET* pAET = new AET;
+	pAET->next = NULL;
+
+	/******初始化NET表，即初始化边表***************/
+	NET* pNET[1024];
+	for (i = MinY; i <= MaxY; ++i) {
+		pNET[i] = new NET;
+		pNET[i]->next = NULL;
+	}
+
+	/******扫描并建立NET表，即建立边表***************/
+	for (i = MinY; i <= MaxY; ++i) {
+		for (int j = 0; j < POINTNUM; ++j) {
+			if (polypoint[j].y == i) {
+				if (polypoint[(j - 1 + POINTNUM) % POINTNUM].y > polypoint[j].y) {
+					NET* p = new NET;
+					p->x = polypoint[j].x;
+					p->ymax = polypoint[(j - 1 + POINTNUM) % POINTNUM].y;
+					p->dx = (polypoint[(j - 1 + POINTNUM) % POINTNUM].x - polypoint[j].x) / (polypoint[(j - 1 + POINTNUM) % POINTNUM].y - polypoint[j].y);
+					p->next = pNET[i]->next;
+					pNET[i]->next = p;
+				}
+
+				if (polypoint[(j + 1 + POINTNUM) % POINTNUM].y > polypoint[j].y) {
+					NET* p = new NET;
+					p->x = polypoint[j].x;
+					p->ymax = polypoint[(j + 1 + POINTNUM) % POINTNUM].y;
+					p->dx = (polypoint[(j + 1 + POINTNUM) % POINTNUM].x - polypoint[j].x) / (polypoint[(j + 1 + POINTNUM) % POINTNUM].y - polypoint[j].y);
+					p->next = pNET[i]->next;
+					pNET[i]->next = p;
+				}
+			}
+		}
+	}
+
+	/******建立并更新活性边表AET***********************/
+	for (i = MinY; i <= MaxY; ++i) {
+		//计算新的交点x,更新AET***************************/  
+		NET* p = pAET->next;
+		while (p != NULL) {
+			p->x = p->x + p->dx;
+			p = p->next;
+		}
+
+		//更新后新AET先排序***************************/  
+		//断表排序,不再开辟空间  
+		AET* tq = pAET;
+		p = pAET->next;
+		tq->next = NULL;
+
+		while (p != NULL) {
+			while (tq->next != NULL && p->x >= tq->next->x)
+				tq = tq->next;
+			NET* s = p->next;
+			p->next = tq->next;
+			tq->next = p;
+			p = s;
+			tq = pAET;
+		}
+
+		//(改进算法)先从AET表中删除ymax==i的结点**************/  
+		AET* q = pAET;
+		p = q->next;
+		while (p != NULL) {
+			if (p->ymax == i) {
+				q->next = p->next;
+				delete p;
+				p = q->next;
+			}
+			else {
+				q = q->next;
+				p = q->next;
+			}
+		}
+
+		//将NET中的新点加入AET,并用插入法按X值递增排序************/  
+		p = pNET[i]->next;
+		q = pAET;
+		while (p != NULL) {
+			while (q->next != NULL && p->x >= q->next->x)
+				q = q->next;
+			NET* s = p->next;
+			p->next = q->next;
+			q->next = p;
+			p = s;
+			q = pAET;
+		}
+
+		/******配对填充颜色************************/
+		p = pAET->next;
+		while (p != NULL && p->next != NULL)
+		{
+			for (float j = p->x; j <= p->next->x; j++)
+			{
+				pDC->SetPixel(static_cast<int>(j), i, col);
+			}  // pDC.MoveTo( static_cast<int>(p->x), i ); 用画直线来替换上面的设置像素点颜色，速度更快  
+							  //  pDC.LineTo( static_cast<int>(p->next->x), i );  
+
+			p = p->next->next;//考虑端点情况  
+		}
+	}
+
+	NET* phead = NULL;
+	NET* pnext = NULL;
+	//释放边表  
+	/*
+	for( i = MinY;i <= MaxY;i++ )
+	{
+		phead = pNET[i];
+
+		while( phead != NULL )
+		{
+			pnext = phead->next;
+			delete phead;
+			phead = pnext;
+		}
+
+		pNET[i] = NULL;
+	}
+	*/
+	//释放活跃边表  
+	phead = pAET;
+	while (phead != NULL)
+	{
+		pnext = phead->next;
+		delete phead;
+		phead = pnext;
+	}
+}
+
+
+void CMy201916010728View::Bfs(int x, int y, int col, int edgeCol, CDC* pDC) {
+	// TODO: 在此处添加实现代码.
+	long c;
+	c = pDC->GetPixel(x, y);
+	if (c != col && c != edgeCol) {
+		pDC->SetPixel(x, y, col);
+		//Sleep(2);
+		Bfs(x + 1, y, col, edgeCol, pDC);
+		Bfs(x - 1, y, col, edgeCol, pDC);
+		Bfs(x, y + 1, col, edgeCol, pDC);
+		Bfs(x, y - 1, col, edgeCol, pDC);
+	}
+}
+
+
+void CMy201916010728View::OnBoundaryFill() {
+	CDC* pDC = GetDC();
+	BoundaryFillDlg inputDlg;
+	int nResponse = inputDlg.DoModal();
+	if (nResponse == IDOK) {
+		//这里获取输入并在客户区输出
+		point LU, RD, S;
+		LU.x = _wtoi(inputDlg.LUX.GetBuffer(0));
+		LU.y = _wtoi(inputDlg.LUY.GetBuffer(0));
+		RD.x = _wtoi(inputDlg.RDX.GetBuffer(0));
+		RD.y = _wtoi(inputDlg.RDY.GetBuffer(0));
+		S.x = _wtoi(inputDlg.SX.GetBuffer(0));
+		S.y = _wtoi(inputDlg.SY.GetBuffer(0));
+
+		pDC->Rectangle(LU.x, LU.y, RD.x, RD.y);
+		Bfs(S.x, S.y, RGB(255, 105, 180), RGB(0, 0, 0), pDC);
 	}
 }
