@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include<GL\glut.h>
+#include <GL\glut.h>
 #include "CircleDlg.h"
 #include "LineDlg.h"
 #include "RectangleDlg.h"

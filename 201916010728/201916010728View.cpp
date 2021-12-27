@@ -341,8 +341,7 @@ void CMy201916010728View::OnCdcRectangle()
 	} else return;
 }
 // 创意绘图
-void CMy201916010728View::OnCdcPainting()
-{
+void CMy201916010728View::OnCdcPainting() {
 	// TODO: 在此添加命令处理程序代码
 	CDC* pDC = GetDC();
 	pDC->Ellipse(100, 100, 300, 300);// 风车圆
@@ -607,8 +606,6 @@ void CMy201916010728View::OnPolyScan() {
 	}
 	else return;
 	polyScanDraw(polypoint, RGB(127, 255, 212));	//绿的
-
-
 }
 
 
